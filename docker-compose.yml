@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: phone-book-pg
+    image: postgres:15
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: phone_db
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres_network
+
+volumes:
+  postgres_data:
+networks:
+  postgres_network:
+    driver: bridge
+  
+    
