@@ -2,10 +2,12 @@ package com.example.phonebook.services;
 
 import com.example.phonebook.dtos.PhoneBookRequestDto;
 import com.example.phonebook.dtos.PhoneBookResponseDto;
+import com.example.phonebook.exceptions.PhoneBookNotFoundException;
 import com.example.phonebook.helpers.Mapper;
 import com.example.phonebook.models.PhoneBook;
 import com.example.phonebook.respositories.PhoneBookRepository;
 import com.example.phonebook.services.interfaces.PhoneBookService;
+import com.example.phonebook.utils.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,7 +45,7 @@ public class PhoneBookServiceImpl implements PhoneBookService {
 
     @Override
     public PhoneBookResponseDto getById(Integer id) {
-        PhoneBook phoneBook = phoneBookRepository.findById(id).orElse(null);
+        PhoneBook phoneBook = phoneBookRepository.findById(id).orElseThrow(() -> new PhoneBookNotFoundException(ErrorCode.ERROR_PHONEBOOK_NOT_FOUND + id));
         if(phoneBook == null){
             return null;
         }
@@ -52,7 +54,7 @@ public class PhoneBookServiceImpl implements PhoneBookService {
 
     @Override
     public Boolean update(Integer id, PhoneBookRequestDto phoneBookRequestDto) {
-        PhoneBook phoneBook = phoneBookRepository.findById(id).orElse(null);
+        PhoneBook phoneBook = phoneBookRepository.findById(id).orElseThrow(() -> new PhoneBookNotFoundException(ErrorCode.ERROR_PHONEBOOK_NOT_FOUND + id));
         if(phoneBook == null){
             return false;
         }
@@ -68,7 +70,7 @@ public class PhoneBookServiceImpl implements PhoneBookService {
 
     @Override
     public Boolean deleteById(Integer id) {
-        PhoneBook phoneBook = phoneBookRepository.findById(id).orElse(null);
+        PhoneBook phoneBook = phoneBookRepository.findById(id).orElseThrow(() -> new PhoneBookNotFoundException(ErrorCode.ERROR_PHONEBOOK_NOT_FOUND + id));
         if(phoneBook == null){
             return false;
         }
