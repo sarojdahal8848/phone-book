@@ -24,9 +24,9 @@ public class PhoneBookRequestDto {
     @NotBlank(message = "Last name cannot be blank")
     private String lastName;
     @NotBlank(message = "Phone1 cannot be blank")
-    @Pattern(regexp = "^(98|97|96|94|95)\\d{8}$", message = "Invalid phone number")
+    @Pattern(regexp = "^(98|97|96|94|95)\\d{8}$", message = "Invalid phone number1")
     private String phone1;
-    @Pattern(regexp = "^(98|97|96|94|95)\\d{8}$", message = "Invalid phone number")
+    @Pattern(regexp = "^(98|97|96|94|95)\\d{8}$", message = "Invalid phone number2")
     private String phone2;
     private String imageUrl;
 }
