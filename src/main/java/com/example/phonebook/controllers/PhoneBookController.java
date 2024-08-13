@@ -8,6 +8,7 @@ import com.example.phonebook.models.PhoneBook;
 import com.example.phonebook.services.interfaces.PhoneBookService;
 import com.example.phonebook.utils.AppConstant;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,7 @@ public class PhoneBookController {
     private final PhoneBookService phoneBookService;
     
     @PostMapping
-    public ResponseEntity<PhoneBookResponseDto> createPhoneBook(@RequestBody PhoneBookRequestDto requestDto) {
+    public ResponseEntity<PhoneBookResponseDto> createPhoneBook(@Valid @RequestBody PhoneBookRequestDto requestDto) {
         PhoneBookResponseDto createdPhoneBook = phoneBookService.save(requestDto);
         return new ResponseEntity<>(createdPhoneBook, HttpStatus.CREATED);
     }

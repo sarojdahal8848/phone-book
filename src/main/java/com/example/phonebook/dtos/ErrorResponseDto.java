@@ -7,12 +7,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ErrorResponseDto {
     private Integer statusCode;
-    private String message;
+    private String title;
+    private List<Object> errors;
     private Date timestamp;
 }
